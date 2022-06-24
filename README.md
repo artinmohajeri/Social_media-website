@@ -1,5 +1,5 @@
 # Cafe-website-practice
-write these commands in your terminal first.
+# write these commands in your terminal first.
 
 python -m venv .venv
 
