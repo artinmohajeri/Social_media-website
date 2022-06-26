@@ -5,4 +5,6 @@ urlpatterns = [
     path("",views.index,name="index"),
     path("login/",views.login,name="login"),
     path("posts/",views.posts,name="posts"),
+    path("post/<int:id>",views.post,name="post"),
+    # path("post/",views.post,name="post"),
 ]

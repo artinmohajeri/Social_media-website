@@ -50,6 +50,7 @@
           <textarea style="border-radius:30px;" cols="30" rows="5" placeholder="Create a post"></textarea>
           <input style="background-color:rgb(240, 240, 98) ; color: black;border-radius: 14px;" type="submit" value="Submit" class="btn btn-dark my-1" />
         </form>
+        {% for post in posts %}
         <div class="posts">
           <div class="post bg-white my-1 p-1" style="border-radius:40px ;">
             <div>
@@ -62,10 +63,12 @@
                 <h4>MohammadNpak</h4>
               </a>
             </div>
-
+            
             <div style="border-radius:20px ;">
               <p class="my-1">
-                today i made a tasty coffee. please check and support my work.
+                <h3>{{post.title}}</h3>
+                <br>
+                {{post.body}}
               </p>
               <button class="btn">
                 <i class="fas fa-thumbs-up"></i> <span>4</span>
@@ -73,12 +76,16 @@
               <button class="btn">
                 <i class="fas fa-thumbs-down"></i>
               </button>
-              <a href="post.html" class="btn btn-primary" style="color:black ; background-color: bisque;">
-                Discussion
+              <a href="{{post.get_absolute_url}}" class="btn btn-primary" style="color:black ; background-color: bisque;">
+                see this post
               </a>
             </div>
+            
           </div>
           </div>
+          {% endfor %}
+          
+
         </div>
       </div>
     </section>
