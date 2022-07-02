@@ -61,7 +61,8 @@
         <div class="post-form-header bg-primary">
           <h3>Leave A Comment</h3>
         </div>
-        <form class="form my-1">
+        <form class="form my-1" method="post">
+          {% csrf_token %}
           <textarea
             name="text"
             cols="30"
@@ -90,6 +91,8 @@
                 <h3>{{comment.post.title}}</h3>
                 <br>
               {{comment.body}}
+              <br>
+              <p style="position:relative ; top:26px ;"><small><small>{{comment.date}}</small></small></p>
             </p>
           </div>
         </div>

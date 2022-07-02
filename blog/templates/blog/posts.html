@@ -43,12 +43,16 @@
       <h1 class="large text-primary" style="color:white ;">
         Posts
       </h1>
-      <p style="color: white;" class="lead"><i class="fas fa-user"></i> Welcome to the community</p>
+      <p style="color: white;" class="lead"><i class="fas fa-user"></i> Create a post</p>
 
       <div class="post-form">
-        <form class="form my-1">
-          <textarea style="border-radius:30px;" cols="30" rows="5" placeholder="Create a post"></textarea>
+        <form class="form my-1" method="post">
+          {% csrf_token %}
+          <input type="text" style="border-radius:30px ; width: 400px;" placeholder="title..." name="title">
+          <br>
+          <textarea style="border-radius:30px;" cols="30" rows="5" placeholder="body..." name="body"></textarea>
           <input style="background-color:rgb(240, 240, 98) ; color: black;border-radius: 14px;" type="submit" value="Submit" class="btn btn-dark my-1" />
+
         </form>
         {% for post in posts %}
         <div class="posts">
