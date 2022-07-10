@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css?family=Raleway"
       rel="stylesheet"
     />
+    
     <link rel="stylesheet" href="{%static 'style.min copy3.css' %}" />
     <title>cafe</title>
   </head>
@@ -61,10 +62,10 @@
               <a href="profile.html">
                 <img
                   class="round-img"
-                  src="{%static 'pic/mohammadNpak.jpg'%}"
+                  src="{{post.writer.pic.url}}"
                   alt="picture of user"
                 />
-                <h4>MohammadNpak</h4>
+                <h4>{{post.writer.username}}</h4>
               </a>
             </div>
             
@@ -89,7 +90,6 @@
           </div>
           {% endfor %}
           
-
         </div>
       </div>
     </section>

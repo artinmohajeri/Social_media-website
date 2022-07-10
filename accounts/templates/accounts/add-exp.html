@@ -46,38 +46,47 @@
             positions that you have had in the past</i> 
       </p>
       <small style="color: white;">required field</small>
-      <form class="form">
+      <form class="form" method="post">
+        {% csrf_token %}
+        {{form}}
+        {% comment %} <div class="form-group">
+          <input style="border-radius: 40px;" type="text" placeholder="* Job Title" name="title" required />
+        </div> 
         <div class="form-group">
-          <input type="text" placeholder="* Job Title" name="title" required />
+          <input style="border-radius: 40px;" type="text" placeholder="* Company" name="company" required/>
         </div>
         <div class="form-group">
-          <input type="text" placeholder="* Company" name="company" required />
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Location" name="location" />
+          <input style="border-radius: 40px;" type="text" placeholder="Location" name="location"/>
         </div>
         <div class="form-group">
           <h4 style="color: white;">From Date</h4>
-          <input type="date" name="from" />
+          <input type="date" name="from" style="border-radius: 40px;"> />
         </div>
         <div class="form-group">
           <h4 style="color: white;">To Date</h4>
-          <input type="date" name="to" />
-        </div>
-        <div class="form-group">
-          <p><input  style="color: white;" type="checkbox" name="current" value="" /> Current Job</p>
+          <input type="date" name="to" style="border-radius: 40px;"/>
         </div>
         <div class="form-group">
           <textarea
             name="description"
             cols="30"
             rows="5"
-            placeholder="Job Description"
+            placeholder="  Job Description"
+            style="border-radius:50px ;"
           ></textarea>
-        </div>
-        <input type="submit" class="btn btn-primary my-1" />
-        <a class="btn my-1" href="dashboard.html">Go Back</a>
+        </div> {% endcomment %}
+        <input type="submit" class="btn btn-primary my-1" style="border-radius: 40px;"> />
+        <a style="border-radius:50px ;" class="btn my-1" href="dashboard.html">Go Back</a>
       </form>
     </section>
+    <h1>
+      {% comment %} {{form}} {% endcomment %}
+      {% comment %} {{job_title}}
+      {{company}}
+      {{location}}
+      {{from_date}}
+      {{to_date}}
+      {{job_description}} {% endcomment %}
+    </h1>
   </body>
 </html>

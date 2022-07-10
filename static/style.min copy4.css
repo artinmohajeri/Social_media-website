@@ -585,4 +585,7 @@
   div{
     border-radius: 90px;
   }
-  
+
+.my-1 textarea{
+  background-color:#8bf0bf;
+}

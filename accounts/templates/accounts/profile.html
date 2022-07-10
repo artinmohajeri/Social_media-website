@@ -21,7 +21,7 @@
     <title>cafe</title>
   </head>
   <body id="prof">
-    <nav class="navbar bg-dark">
+    <nav class="navbar bg-dark"  style="background-color:rgb(131, 131, 2) ;">
       <h1>
         <a href="dashboard.html"> <i class="fas fa-code"></i> cafe </a>
       </h1>
@@ -36,14 +36,15 @@
 
       <div class="profile-grid my-1">
         <!-- Top -->
-        <div class="profile-top bg-primary p-2">
+        <div class="profile-top bg-primary p-2"  style="background-image: linear-gradient(104deg,rgb(212, 0, 255),rgb(253, 27, 177),rgb(249, 131, 230)) ; border-radius:200px ;">
           <img
-            class="round-img my-1"
+            class="prof"
             src="{%static 'pic/mohammadNpak.jpg'%}"
             alt="user picture"
           />
 
           <h1 class="large">mohammadNpak</h1>
+          <h3 style="position:relative;top:30px ;">shomal</h3>
           <p class="leadprof">coffe maker</p>
           <div class="icons my-1">
             <a href="#">
@@ -64,7 +65,7 @@
           </div>
         </div>
         <!-- About -->
-        <div class="profile-about bg-light p-2">
+        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;">
           <p>
             I am very professional in making coffee :)
           </p>
@@ -77,7 +78,7 @@
           </div>
         </div>
         <!-- Experience -->
-        <div class="profile-exp bg-white p-2">
+        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;">
           <h2 class="text-primary"></h2>
           <div>
             <h3>cafe</h3>
@@ -92,7 +93,7 @@
           </div>
         </div>
         <!-- Education -->
-        <div class="profile-edu bg-white p-2">
+        {% comment %} <div class="profile-edu bg-white p-2">
           <h2 class="text-primary"></h2>
           <div>
             <h3>University Of coffee making</h3>
@@ -103,67 +104,6 @@
               <strong>Description: </strong>I love to make coffee 
             </p>
           </div>
-        </div>
-        <!-- Github Repos -->
-        <div class="profile-github">
-          <h2 class="text-primary my-1">
-            <i class="fab fa-github"></i> Github Repos
-          </h2>
-          <div class="repo bg-white my-1 p-1">
-            <div>
-              <h4><a href="#">Repo One</a></h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facilis, tenetur.
-              </p>
-            </div>
-
-            <div>
-              <ul>
-                <li class="badge badge-primary">Stars: 44</li>
-                <li class="badge badge-dark">Watchers: 20</li>
-                <li class="badge badge-light">Forks: 25</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="repo bg-white my-1 p-1">
-            <div>
-              <h4><a href="#">Repo Two</a></h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facilis, tenetur.
-              </p>
-            </div>
-
-            <div>
-              <ul>
-                <li class="badge badge-primary">Stars: 44</li>
-                <li class="badge badge-dark">Watchers: 20</li>
-                <li class="badge badge-light">Forks: 25</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="repo bg-white my-1 p-1">
-            <div>
-              <h4><a href="#">Repo One</a></h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facilis, tenetur.
-              </p>
-            </div>
-
-            <div>
-              <ul>
-                <li class="badge badge-primary">Stars: 44</li>
-                <li class="badge badge-dark">Watchers: 20</li>
-                <li class="badge badge-light">Forks: 25</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </div> {% endcomment %}
   </body>
 </html>

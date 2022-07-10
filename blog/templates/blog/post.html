@@ -20,9 +20,9 @@
     <title>cafe</title>
   </head>
   <body id='postbody'>
-    <nav class="navbar bg-dark">
+    <nav class="navbar bg-dark" style="background-color:rgb(106, 141, 2) ;">
       <h1>
-        <a href="index.html"><i class="fas fa-code"></i> cafe</a>
+        cafe
       </h1>
       <ul>
         <li><a href="profiles.html">managers</a></li>
@@ -42,10 +42,11 @@
           <a href="profile.html">
             <img
               class="round-img"
-              src="{%static 'pic/mohammadNpak.jpg' %}"
+              src="{{post.writer.pic.url}}"
               alt=""
             />
-            <h4>{{username}}</h4>
+            <h3>{{post.writer.get_full_name}}</h3>
+            <h4>{{post.writer.username}}</h4>
           </a>
         </div>
         <div>
@@ -63,13 +64,7 @@
         </div>
         <form class="form my-1" method="post">
           {% csrf_token %}
-          <textarea
-            name="text"
-            cols="30"
-            rows="5"
-            placeholder="Comment on this post"
-            
-          ></textarea>
+          {{form}}
           <input type="submit" class="btn btn-dark my-1" value="Submit" />
         </form>
       </div>
@@ -80,10 +75,10 @@
             <a href="profile.html">
               <img
                 class="round-img"
-                src="{%static 'pic/mohammadNpak.jpg' %}"
+                src="{{comment.writer.pic.url}}"
                 alt=""
               />
-              <h4>{{username}}</h4>
+              <h4>{{comment.writer.get_full_name}}</h4>
             </a>
           </div>
           <div>
