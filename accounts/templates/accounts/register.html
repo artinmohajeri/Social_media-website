@@ -21,14 +21,12 @@
     <title>cafe</title>
   </head>
   <body id="reg">
-    <nav class="navbar bg-dark">
+    <nav class="navbar bg-dark" style="background-color:rgb(131, 131, 2) ;border-radius:40px;">
       <h1>
-        <a href="dashboard.html"> <i class="fas fa-code"></i> cafe </a>
+         cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">managers</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
       </ul>
     </nav>
     <section class="containerreg">
@@ -36,27 +34,25 @@
         Sign Up
       </h1>
       <p class="lead"><i id="crereg"></i></p>
-      <form action="dashboard.html" class="form">
+      <form action="dashboard.html" class="form" method='post'>
+        {% csrf_token %}
         <div class="form-group">
-          <input id="namereg" type="text" placeholder="Name" required />
+          <input id="namereg" type="text" placeholder=" Name" required style="border-radius:90px;">
         </div>
         <div class="form-group">
-          <input id="emailreg" type="email" placeholder="Email Address" />
-          <small class="form-textreg">
-            This site uses Gravatar, so if you want a profile image, use a
-            Gravatar email
-          </small>
+          <input id="emailreg" type="email" placeholder=" Email Address" style="border-radius:90px;">
+        
         </div>
         <div class="form-group">
-          <input id="passreg" type="password" placeholder="Password" minlength="6" />
+          <input id="passreg" type="password" placeholder=" Password" minlength="6" style="border-radius:90px;">
         </div>
         <div class="form-group">
-          <input id="passregc" type="password" placeholder="Confirm Password" minlength="6" />
+          <input id="passregc" type="password" placeholder=" Password again" minlength="6" style="border-radius:90px;">
         </div>
         <input type="submit" value="Register" class="btn btn-primary" />
       </form>
       <p class="my-1">
-        Already have an account? <a href="login.html" style="color: rgb(243, 247, 8);">Sign In</a>
+        You have an account? <a href="{% url 'login' %}" style="color: rgb(243, 247, 8);">Sign In</a>
       </p>
     </section>
   </body>

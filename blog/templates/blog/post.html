@@ -20,23 +20,22 @@
     <title>cafe</title>
   </head>
   <body id='postbody'>
-    <nav class="navbar bg-dark" style="background-color:rgb(106, 141, 2) ;">
+    <nav class="navbar bg-dark" style="background-color:rgb(106, 141, 2) ;border-radius:40px;">
       <h1>
         cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">managers</a></li>
-        <li><a href="posts.html">Posts</a></li>
+        <li><a href="{% url 'posts' %}">Posts</a></li>
+        <li><a href="{% url 'profile' %}">profile</a></li>
         <li>
           <a href="login.html" title="Logout">
-            <i class="fas fa-sign-out-alt"></i>
             <span class="hide-sm">Logout</span></a
           >
         </li>
       </ul>
     </nav>
     <section class="container">
-      <a href="posts.html" class="btn">Back To Posts</a>
+      <a href="{% url 'posts' %}" class="btn">Back To Posts</a>
       <div class="post bg-white p-1 my-1">
         <div>
           <a href="profile.html">
@@ -59,18 +58,17 @@
       </div>
 
       <div class="post-form">
-        <div class="post-form-header bg-primary">
-          <h3>Leave A Comment</h3>
-        </div>
+        
         <form class="form my-1" method="post">
           {% csrf_token %}
           {{form}}
-          <input type="submit" class="btn btn-dark my-1" value="Submit" />
+          <input type="submit" class="btn btn-dark my-1" value="send" style="border-radius:50px;background-color:rgb(117, 117, 1);">
         </form>
       </div>
       {% for comment in comments %}
+      <hr style="height:5px ;background-color:rgb(155, 152, 152) ;">
       <div class="posts">
-        <div class="post bg-white p-1 my-1">
+        <div class="post bg-white p-1 my-1" style="background-color: rgb(244, 191, 219);">
           <div>
             <a href="profile.html">
               <img
@@ -92,3 +90,4 @@
           </div>
         </div>
         {% endfor %}
+

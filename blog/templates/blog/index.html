@@ -20,26 +20,26 @@
     <title>cafe</title>
   </head>
   <body>
-    <nav class="navbar bg-dark">
+    <nav class="navbar bg-dark" style="border-radius:50px ;background-color:rgb(99, 147, 2)">
       <h1>
-        <a href="dashboard.html"> <i class="fas fa-code"></i> cafe </a>
+        cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">managers</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
       </ul>
     </nav>
     <section class="landing">
       <div class="dark-overlay">
         <div class="landing-inner">
           <h1 class="x-large">Artin cafe</h1>
-          <p class="lead">
+          <p class="lead" style="position: relative; bottom:60px ;">
             this website is a sample for MohammadNpak
           </p>
           <div class="buttons">
-            <a href="register.html" class="btn btn-primary">Sign Up</a>
-            <a href="login.html" class="btn btn">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-primary" style="border-radius:50px; background-color:#d1d1d1;">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn btn" style="border-radius:50px; background-color:#d1d1d1;">Login</a>
+            <br>
           </div>
         </div>
       </div>

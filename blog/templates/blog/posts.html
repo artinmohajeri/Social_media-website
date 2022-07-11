@@ -20,21 +20,15 @@
     <title>cafe</title>
   </head>
   <body id="posts">
-    <nav class="navbar bg-dark">
+    <nav class="navbar bg-dark" style="background-color: rgb(99, 147, 2);border-radius:40px;">
       <h1>
-        <a href="dashboard.html"> <i class="fas fa-code"></i> cafe </a>
+        cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">managers</a></li>
-        <li>
-          <a href="dashboard.html">
-            <i class="fas fa-user"></i>
-            <span class="hide-sm"> Dashboard</span></a
-          >
-        </li>
+        <li><a href="{% url 'profile' %}">profile</a></li>
         <li>
           <a href="login.html">
-            <i class="fas fa-sign-out-alt"></i>
+            
             <span class="hide-sm"> Logout</span></a
           >
         </li>
@@ -44,20 +38,20 @@
       <h1 class="large text-primary" style="color:white ;">
         Posts
       </h1>
-      <p style="color: white;" class="lead"><i class="fas fa-user"></i> Create a post</p>
+      <p style="color: white;" class="lead"> make a post</p>
 
       <div class="post-form">
         <form class="form my-1" method="post">
           {% csrf_token %}
-          <input type="text" style="border-radius:30px ; width: 400px;" placeholder="title..." name="title">
+          <input type="text" style="border-radius:50px ; width: 400px; background-image: linear-gradient(144deg, #e5e5e5,#d1d1d1,#b2b2b2,#828282);" placeholder=" title..." name="title">
           <br>
-          <textarea style="border-radius:30px;" cols="30" rows="5" placeholder="body..." name="body"></textarea>
-          <input style="background-color:rgb(240, 240, 98) ; color: black;border-radius: 14px;" type="submit" value="Submit" class="btn btn-dark my-1" />
+          <textarea style="border-radius:70px; background-image: linear-gradient(144deg, #e5e5e5,#d1d1d1,#b2b2b2,#828282);" cols="30" rows="5" placeholder="   body..." name="body"></textarea>
+          <input style="background-color:rgb(240, 240, 98) ; color: black;border-radius: 30px;" type="submit" value="post" class="btn btn-dark my-1" />
 
         </form>
         {% for post in posts %}
         <div class="posts">
-          <div class="post bg-white my-1 p-1" style="border-radius:40px ;">
+          <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
             <div>
               <a href="profile.html">
                 <img
@@ -74,16 +68,12 @@
                 <h3>{{post.title}}</h3>
                 <br>
                 {{post.body}}
-              </p>
-              <button class="btn">
-                <i class="fas fa-thumbs-up"></i> <span>4</span>
-              </button>
-              <button class="btn">
-                <i class="fas fa-thumbs-down"></i>
-              </button>
-              <a href="{{post.get_absolute_url}}" class="btn btn-primary" style="color:black ; background-color: bisque;">
+              </p> <br>
+              <a href="{{post.get_absolute_url}}" class="btn btn-primary" style="color:black ;border-radius: 30px; background-color: rgb(243, 64, 225);">
                 see this post
               </a>
+              <br>
+              <small>{{post.date}}</small>
             </div>
             
           </div>

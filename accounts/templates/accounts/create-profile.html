@@ -21,17 +21,15 @@
     <title>cafe</title>
   </head>
   <body id="cp1">
-    <nav class="navbar bg-dark">
+    <nav class="navbar bg-dark" style="background-color:rgb(131, 131, 2) ;border-radius:40px;">
       <h1>
-        <a href="dashboard.html"> <i class="fas fa-code"></i> cafe </a>
+        cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">managers</a></li>
-        <li>
-        </li>
+        <li><a href="{% url 'register' %}">sign up</a></li>
+    
         <li>
           <a href="login.html">
-            <i class="fas fa-sign-out-alt"></i>
             <span class="hide-sm"> Logout</span></a
           >
         </li>

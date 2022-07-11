@@ -21,31 +21,32 @@
     <title>cafe</title>
   </head>
   <body id="prof">
-    <nav class="navbar bg-dark"  style="background-color:rgb(131, 131, 2) ;">
+    <nav class="navbar bg-dark"  style="background-color:rgb(131, 131, 2) ;border-radius:40px;">
       <h1>
-        <a href="dashboard.html"> <i class="fas fa-code"></i> cafe </a>
+        cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">managers</a></li>
         <li><a href="register.html">logout</a></li>
-        <li><a href="register.html">posts</a></li>
+        <li><a href="{% url 'posts' %}">posts</a></li>
       </ul>
     </nav>
     <section class="container">
-      <a href="profiles.html" class="btn">Back To create profile</a>
+      <a href="{% url 'create_profile' %}" class="btn">go back to create profile</a>
 
       <div class="profile-grid my-1">
         <!-- Top -->
         <div class="profile-top bg-primary p-2"  style="background-image: linear-gradient(104deg,rgb(212, 0, 255),rgb(253, 27, 177),rgb(249, 131, 230)) ; border-radius:200px ;">
           <img
             class="prof"
-            src="{%static 'pic/mohammadNpak.jpg'%}"
+            src="{{user.pic.url}}"
             alt="user picture"
           />
 
-          <h1 class="large">mohammadNpak</h1>
-          <h3 style="position:relative;top:30px ;">shomal</h3>
-          <p class="leadprof">coffe maker</p>
+          <h1 class="large">{{user.username}}</h1>
+          <h1>{{user.get_full_name}}</h1>
+
+          <h3 style="position:relative;top:30px ;">{{user.location}}</h3>
+          <p class="leadprof">{{user.job}}</p>
           <div class="icons my-1">
             <a href="#">
               <i class="fas fa-globe fa-2x"></i>
@@ -65,25 +66,13 @@
           </div>
         </div>
         <!-- About -->
-        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;">
-          <p>
-            I am very professional in making coffee :)
-          </p>
-          <div class="line"></div>
-          <div class="skills">
-            <div class="p-1"><i class="fas fa-check"></i> coffee</div>
-            <div class="p-1"><i class="fas fa-check"></i> ice coffee</div>
-            <div class="p-1"><i class="fas fa-check"></i> sperso</div>
-            <div class="p-1"><i class="fas fa-check"></i> late coffee</div>
-          </div>
-        </div>
-        <!-- Experience -->
-        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;">
+        
+        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;position: relative; bottom: 220px;">
           <h2 class="text-primary"></h2>
           <div>
             <h3>cafe</h3>
             <p>Oct 2011 - Current</p>
-            <p><strong>Position: </strong>Worker</p>
+            <p><strong>job: </strong>worker</p>
             <p>
               <strong>Description: </strong>I work for a good cafe
             </p>
@@ -92,18 +81,17 @@
 
           </div>
         </div>
-        <!-- Education -->
-        {% comment %} <div class="profile-edu bg-white p-2">
-          <h2 class="text-primary"></h2>
-          <div>
-            <h3>University Of coffee making</h3>
-            <p>Sep 1993 - June 1999</p>
-            <p><strong>Degree: </strong> PHD</p>
-            <p><strong>Field Of Study: </strong>coffee making</p>
-            <p>
-              <strong>Description: </strong>I love to make coffee 
-            </p>
+        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;position: relative;top: 280px;">
+          <p>
+            {{user.bio}}
+          </p>
+          <div class="line"></div>
+          <div class="skills">
+
+            <div class="p-1">ice coffee</div>
+            <div class="p-1">sperso</div>
+            <div class="p-1">late coffee</div>
           </div>
-        </div> {% endcomment %}
+        </div>
   </body>
 </html>

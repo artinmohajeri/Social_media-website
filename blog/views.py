@@ -1,9 +1,11 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from blog.forms import CommentForm, PostForm
-
+from django.contrib.auth import authenticate,login
+from django.contrib import messages
 from .models import Post, Comment, Sample
+from django.urls import reverse
 # Create your views here.
 
 
@@ -11,16 +13,15 @@ def index(request):
     return render(request, 'blog/index.html', {})
 
 
-def login(request):
-    return render(request, 'blog/login.html', {})
-
 @login_required(login_url='/account/login/')
 def posts(request):
     # u = get_user_model().objects.first()
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid:
-            form.save()
+            form2 = form.save(commit=False)
+            form2.writer = request.user
+            form2.save()
         # t = request.POST.get("title")
         # b = request.POST.get("body")
         # if t and b:

@@ -1,14 +1,15 @@
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from . managers import CustomUserManager
 # Create your models here.
 
 class User(AbstractUser):
     pic = models.ImageField(upload_to = 'profile_picture', null=True, blank = True)  #فایل های عکسی پردازششون با پیلو هست
     bio = models.TextField(null = True , blank = True)
     job = models.CharField(max_length=100, null = True , blank = True)
-
+    location = models.CharField(max_length=500, default='location')
+    objects = CustomUserManager()
 class SocialMedia(models.Model):
     KINDS = (
         ('w', 'web'),
