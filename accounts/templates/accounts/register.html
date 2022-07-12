@@ -26,7 +26,7 @@
          cafe
       </h1>
       <ul>
-        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'login' %}">login</a></li>
       </ul>
     </nav>
     <section class="containerreg">
@@ -34,20 +34,17 @@
         Sign Up
       </h1>
       <p class="lead"><i id="crereg"></i></p>
-      <form action="dashboard.html" class="form" method='post'>
+      <form action="{% url 'register' %}" class="form" method='post'>
         {% csrf_token %}
         <div class="form-group">
-          <input id="namereg" type="text" placeholder=" Name" required style="border-radius:90px;">
+          <input name="name" id="namereg" type="text" placeholder=" Name" required style="border-radius:90px;">
         </div>
         <div class="form-group">
-          <input id="emailreg" type="email" placeholder=" Email Address" style="border-radius:90px;">
+          <input name="username" id="emailreg" type="text" placeholder=" Username" style="border-radius:90px;">
         
         </div>
         <div class="form-group">
-          <input id="passreg" type="password" placeholder=" Password" minlength="6" style="border-radius:90px;">
-        </div>
-        <div class="form-group">
-          <input id="passregc" type="password" placeholder=" Password again" minlength="6" style="border-radius:90px;">
+          <input name="password" id="passreg" type="password" placeholder=" Password" style="border-radius:90px;">
         </div>
         <input type="submit" value="Register" class="btn btn-primary" />
       </form>

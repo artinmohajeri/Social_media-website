@@ -1,9 +1,9 @@
 from django import forms
-from .models import AddExperience,User,SocialMedia,SkillSet
+from .models import Experience,User,SocialMedia,Skill, Register
 
 class AddExperienceForm(forms.ModelForm):
     class Meta:
-        model = AddExperience
+        model = Experience
         exclude = ['user']
 
 class UserForm(forms.ModelForm):
@@ -18,5 +18,10 @@ class SocialMediaForm(forms.ModelForm):
 
 class SkillSetForm(forms.ModelForm):
     class Meta:
-        model = SkillSet
+        model = Skill
         fields = ['name']
+
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = Register
+        fields = ['name','username','password']

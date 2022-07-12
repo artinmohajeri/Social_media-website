@@ -20,14 +20,14 @@ class SocialMedia(models.Model):
     )
     url = models.URLField()
     kinds = models.CharField(max_length = 1, choices = KINDS)
-    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    user = models.ForeignKey(User,on_delete = models.CASCADE,)
 
 
-class SkillSet(models.Model):
+class Skill(models.Model):
     name = models.CharField(max_length = 100)
     user = models.ManyToManyField(User)
 
-class AddExperience(models.Model):
+class Experience(models.Model):
     job_title = models.CharField(max_length=200)
     company = models.CharField(max_length=150)
     location = models.CharField(max_length=500)
@@ -35,3 +35,8 @@ class AddExperience(models.Model):
     to_date = models.DateField()
     job_description = models.TextField()
     user = models.ForeignKey(User,on_delete = models.CASCADE)
+
+class Register(models.Model):
+    name = models.CharField(max_length=300)
+    username = models.CharField(max_length=300)
+    password = models.CharField(max_length=300)

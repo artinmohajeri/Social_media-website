@@ -26,7 +26,11 @@
         cafe
       </h1>
       <ul>
-        <li><a href="register.html">logout</a></li>
+        <li><a href="{% url 'profile' %}">
+          <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        <li>{{user.username}}</li>
+        <li><a href="{% url 'logout' %}">logout</a></li>
         <li><a href="{% url 'posts' %}">posts</a></li>
       </ul>
     </nav>
@@ -46,52 +50,82 @@
           <h1>{{user.get_full_name}}</h1>
 
           <h3 style="position:relative;top:30px ;">{{user.location}}</h3>
+          {% if user.job %}
           <p class="leadprof">{{user.job}}</p>
+          {% endif %}
           <div class="icons my-1">
-            <a href="#">
+
+
+            {% if user.socialmedia_set.all %}
+            {% for media in user.socialmedia_set.all %}
+
+            {% if media.kinds == 'w' %}
+            <a href="{{media.url}}">
               <i class="fas fa-globe fa-2x"></i>
             </a>
-            <a href="#">
+            {% elif media.kinds == 't' %}
+            <a href="{{media.url}}">
               <i class="fab fa-twitter fa-2x"></i>
             </a>
-            <a href="#">
+            {% elif media.kinds  == 'f' %}
+            <a href="{{media.url}}">
               <i class="fab fa-facebook fa-2x"></i>
             </a>
-            <a href="#">
+            {% elif media.kinds == 'l' %}
+
+            <a href="{{media.url}}">
               <i class="fab fa-linkedin fa-2x"></i>
             </a>
-            <a href="#">
+            {% elif media.kinds == 'i' %}
+
+            <a href="{{media.url}}">
               <i class="fab fa-instagram fa-2x"></i>
             </a>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
           </div>
         </div>
         <!-- About -->
         
-        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;position: relative; bottom: 220px;">
+
+        
+        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;position: relative; bottom: 230px;">
           <h2 class="text-primary"></h2>
+          {% if user.experience.all %}
+          {% for exp in user.experience.all %}
           <div>
-            <h3>cafe</h3>
-            <p>Oct 2011 - Current</p>
-            <p><strong>job: </strong>worker</p>
+            <h3>{{exp.job_title}}</h3>
+            <p>{{exp.from_date}} - {{exp.to_date}}</p>
+            <p><strong>company: </strong>{{exp.company}}</p>
             <p>
-              <strong>Description: </strong>I work for a good cafe
+              <strong>Description: </strong>{{exp.job_description}}
             </p>
           </div>
+          {% endfor %}
+          {% endif %}
           <div>
+
+
+
 
           </div>
         </div>
-        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;position: relative;top: 280px;">
+        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;position: relative;top: 150px;">
+          {% if user.bio %}
           <p>
             {{user.bio}}
           </p>
+          {% endif %}
           <div class="line"></div>
-          <div class="skills">
-
-            <div class="p-1">ice coffee</div>
-            <div class="p-1">sperso</div>
-            <div class="p-1">late coffee</div>
-          </div>
+          {% if user.skill_set.all %}
+          {% for skill in user.skill_set.all %}
+          
+            <div class="p-1">{{skill.name}}</div>
+        
+            {% endfor %}
+            
+            {% endif %}
         </div>
   </body>
 </html>
