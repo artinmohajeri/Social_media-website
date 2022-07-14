@@ -47,17 +47,11 @@
         profile stand out
       </p>
       <small style="color: rgb(9, 9, 9);size:;">required fields</small>
-      <form class="form">
+      <form class="form" method="post">
+        {% csrf_token %}
         <div class="form-group">
-          <select name="status" style="background-color:rgb(235, 224, 224) ;">
-            <option  value="0">coffe maker</option>
-            <option value="Developer">chef</option>
-            <option value="Junior Developer">worker</option>
-            <option value="Senior Developer">leader</option>
-            <option value="Manager">Manager</option>
-
-            <option value="Other">Other</option>
-          </select>
+          <input style="background-color:rgb(235, 224, 224) ;" type="text" placeholder="job" name="job" />
+          
           <small class="form-text" style="color: black;"
             >Give us an idea of where you are at in your career</small
           >

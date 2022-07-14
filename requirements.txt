@@ -1,5 +1,8 @@
-distlib==0.3.4
-filelock==3.7.1
-platformdirs==2.5.2
-six==1.16.0
-virtualenv==20.14.1
+asgiref==3.5.2
+autopep8==1.6.0
+Django==4.0.5
+Pillow==9.2.0
+pycodestyle==2.8.0
+sqlparse==0.4.2
+toml==0.10.2
+tzdata==2022.1

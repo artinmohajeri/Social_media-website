@@ -90,10 +90,12 @@
         
 
         
-        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;position: relative; bottom: 230px;">
+        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;">
           <h2 class="text-primary"></h2>
-          {% if user.experience.all %}
-          {% for exp in user.experience.all %}
+          {% if user.experience_set.all %}
+          <h2>experiences</h2><br>
+          <hr>
+          {% for exp in user.experience_set.all %}
           <div>
             <h3>{{exp.job_title}}</h3>
             <p>{{exp.from_date}} - {{exp.to_date}}</p>
@@ -102,6 +104,7 @@
               <strong>Description: </strong>{{exp.job_description}}
             </p>
           </div>
+          <hr>
           {% endfor %}
           {% endif %}
           <div>
@@ -111,14 +114,16 @@
 
           </div>
         </div>
-        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;position: relative;top: 150px;">
+        <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;">
           {% if user.bio %}
+          <h2>bio</h2>
           <p>
             {{user.bio}}
           </p>
           {% endif %}
           <div class="line"></div>
           {% if user.skill_set.all %}
+          <p><h2>skills</h2></p>
           {% for skill in user.skill_set.all %}
           
             <div class="p-1">{{skill.name}}</div>

@@ -1,27 +1,33 @@
 from django import forms
-from .models import Experience,User,SocialMedia,Skill, Register
+from . import models
+from django.contrib.auth.forms import UserCreationForm
 
 class AddExperienceForm(forms.ModelForm):
     class Meta:
-        model = Experience
+        model = models.Experience
         exclude = ['user']
 
-class UserForm(forms.ModelForm):
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         exclude = ['user']
+
+class UserForm(UserCreationForm):
     class Meta:
-        model = User
-        fields = []
+        model=models.User
+        fields=['username','email']
 
 class SocialMediaForm(forms.ModelForm):
     class Meta:
-        model = SocialMedia
+        model = models.SocialMedia
         exclude = ['user']
 
 class SkillSetForm(forms.ModelForm):
     class Meta:
-        model = Skill
+        model = models.Skill
         fields = ['name']
 
-class RegisterForm(forms.ModelForm):
-    class Meta:
-        model = Register
-        fields = ['name','username','password']
+# class RegisterForm(forms.ModelForm):
+#     class Meta:
+#         model = Register
+#         fields = ['name','username','password']

@@ -46,7 +46,13 @@
       <small style="color: white;">required field</small>
       <form class="form" method="post">
         {% csrf_token %}
-        {{form}}
+        {% for item in form %}
+        <p style='color:white;'>{{item.label}}</p>
+        {{item}}
+        {% for error in item.errors %}
+        <p style="color:rgb(248, 114, 114);">{{error}}</p>
+        {% endfor %}
+        {% endfor %}
         {% comment %} <div class="form-group">
           <input style="border-radius: 40px;" type="text" placeholder="* Job Title" name="title" required />
         </div> 

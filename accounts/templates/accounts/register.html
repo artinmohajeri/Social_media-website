@@ -30,26 +30,53 @@
       </ul>
     </nav>
     <section class="containerreg">
+      {% if form.non_field_errors %}
+      <strong style="color:rgb(247, 121, 121);"><b>{{form.non_field_errors}}</b></strong>
+      {% endif %}
+
+      {% if messages %}
+      {% for message in messages %}
+      <h2><p style='color:rgb(248, 88, 88);'>{{message}}</p></h2>
+      {% endfor %}
+      {% endif %}
+
       <h1 class="large text-primaryreg">
         Sign Up
       </h1>
       <p class="lead"><i id="crereg"></i></p>
-      <form action="{% url 'register' %}" class="form" method='post'>
+      <form class="form" method='post'>
         {% csrf_token %}
+
+        {% for item in form %}
+        <div class="form-group" style="border-radius:100px; width:300px;"><p style='color:white;'>{{item.label}}</p>{{item}}</div>
+        {% endfor %}
+        <ul>
+          {% if item.errors %}
+          {% for error in item.errors %}
+          <li class="alert alert-danger">{{error}}</li>
+          {% endfor %}
+          {% endif %}
+        </ul>
         <div class="form-group">
-          <input name="name" id="namereg" type="text" placeholder=" Name" required style="border-radius:90px;">
+
+
+
+          {% comment %} <input name="name" id="passreg" type="text" placeholder=" Name" style="border-radius:90px;">
         </div>
+
         <div class="form-group">
           <input name="username" id="emailreg" type="text" placeholder=" Username" style="border-radius:90px;">
-        
         </div>
+
         <div class="form-group">
           <input name="password" id="passreg" type="password" placeholder=" Password" style="border-radius:90px;">
-        </div>
+        </div> {% endcomment %}
+        
+
         <input type="submit" value="Register" class="btn btn-primary" />
       </form>
       <p class="my-1">
-        You have an account? <a href="{% url 'login' %}" style="color: rgb(243, 247, 8);">Sign In</a>
+        You have an account? <a href="{% url 'login' %}" style="color: rgb(243, 247, 8);">SignIn</a>
       </p>
     </section>
   </body>
