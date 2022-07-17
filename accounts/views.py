@@ -3,28 +3,55 @@ from django.shortcuts import render, redirect
 from .forms import AddExperienceForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User, auth
+
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from .models import User
 
 
 
 def register(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS,"you have registered successfuly!")
-            return redirect(to=reverse('login'))
-        else:
-            messages.add_message(request, messages.ERROR,"you date is not valid!")
-            return render(request, 'accounts/register.html', {'form': form})
+        # user_profile = Profile.objects.get(user=request.user)
+        # name = request.POST['name']
+        username = request.POST['username']
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        if password == password2:
+            if User.objects.filter(username=username).exists():
+                messages.info(request, 'Username has already been taken')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username=username, password=password)
+                user.save()
+                user_login = auth.authenticate(username=username, password=password)
+                auth.login(request, user_login)
+                return redirect('login')
+        # else:
+        #     messages.info(request, 'two password ')
+        #     return redirect('register')
 
-    elif request.method == "GET":
-        form = UserForm()
-        return render(request, 'accounts/register.html', {'form': form})
-        
-    else:
-        return HttpResponse("404")
+        # if request.FILES.get('image') == None:
+        #     image = user_profile.profileimg
+        #     bio = request.POST['bio']
+        #     location = request.POST['location']
+
+        #     user_profile.profileimg = image
+        #     user_profile.bio = bio
+        #     user_profile.location = location
+        #     user_profile.save()
+        # elif request.FILES.get('image') != None:
+        #     image = request.FILES.get('image')
+        #     bio = request.POST['bio']
+        #     location = request.POST['location']
+
+        #     user_profile.profileimg = image
+        #     user_profile.bio = bio
+        #     user_profile.location = location
+        #     user_profile.save()
+
+    return render(request, 'accounts/register.html', {})
 
 
 @login_required

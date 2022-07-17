@@ -29,22 +29,28 @@
         {% comment %} <li><a href="{% url 'profile' %}">
           <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a> {% endcomment %}
+        <small>choose a profile picture</small> 
+        <li>
+          <input type="file" style="border-radius:40px;">
+        </li>
 
         <li><a href="{% url 'register' %}">sign up</a></li>
         <li>
           <a href="{% url 'logout' %}">
             <span class="hide-sm"> Logout</span></a
-          >
-        </li>
+            >
+          </li>
       </ul>
     </nav>
     <section class="container">
       <h1 class="large text-primary" style="color: black;">
         Create Your Profile
       </h1>
+      <h2 style="color: black;">
+        welcome {{user.username}}
+      </h2>
       <p class="lead">
-        <i class="fas fa-user"style="color: black;"></i> Let's get some information to make your
-        profile stand out
+        <i class="fas fa-user"style="color: black;"></i>create your profile
       </p>
       <small style="color: rgb(9, 9, 9);size:;">required fields</small>
       <form class="form" method="post">

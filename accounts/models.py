@@ -44,16 +44,3 @@ class Experience(models.Model):
     job_description = models.TextField()
     user = models.ForeignKey(User,on_delete = models.CASCADE)
 
-# class Profile(models.Model):
-#     job = models.CharField(max_length=400)
-#     Company = models.CharField(max_length=400)
-#     website = models.URLField()
-#     location = models.CharField(max_length=500)
-#     skill = models.CharField(max_length=400)
-#     bio = models.TextField()
-#     user = models.ForeignKey(User, on_delete = models.CASCADE)
-
-# class Register(models.Model):
-#     name = models.CharField(max_length=300)
-#     username = models.CharField(max_length=300)
-#     password = models.CharField(max_length=300)

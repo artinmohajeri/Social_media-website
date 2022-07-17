@@ -47,7 +47,7 @@
       <form class="form" method='post'>
         {% csrf_token %}
 
-        {% for item in form %}
+        {% comment %} {% for item in form %}
         <div class="form-group" style="border-radius:100px; width:300px;"><p style='color:white;'>{{item.label}}</p>{{item}}</div>
         {% endfor %}
         <ul>
@@ -56,12 +56,12 @@
           <li class="alert alert-danger">{{error}}</li>
           {% endfor %}
           {% endif %}
-        </ul>
+        </ul> {% endcomment %}
         <div class="form-group">
 
 
 
-          {% comment %} <input name="name" id="passreg" type="text" placeholder=" Name" style="border-radius:90px;">
+          <input name="name" id="passreg" type="text" placeholder=" Name" style="border-radius:90px;">
         </div>
 
         <div class="form-group">
@@ -70,7 +70,11 @@
 
         <div class="form-group">
           <input name="password" id="passreg" type="password" placeholder=" Password" style="border-radius:90px;">
-        </div> {% endcomment %}
+        </div>
+
+        <div class="form-group">
+          <input name="password2" id="passreg" type="password" placeholder=" Password cofirm" style="border-radius:90px;">
+        </div>
         
 
         <input type="submit" value="Register" class="btn btn-primary" />
