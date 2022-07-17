@@ -25,10 +25,10 @@
         cafe
       </h1>
       <ul>
-        <li><a href="{% url 'profile' %}">
+        <li><a href="{% url 'profile' username=request.user.username %}">
           <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
-        <li><a href="{% url 'profile' %}">profile</a></li>
+        <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li>
           <a href="{% url 'logout' %}">
             <span class="hide-sm"> Logout</span></a
@@ -55,7 +55,7 @@
         <div class="posts">
           <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
             <div>
-              <a href="profile.html">
+              <a href="{% url 'profile' username=post.writer.username %}">
                 <img
                   class="round-img"
                   src="{{post.writer.pic.url}}"

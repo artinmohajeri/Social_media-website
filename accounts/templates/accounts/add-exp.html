@@ -26,7 +26,7 @@
         cafe
       </h1>
       <ul>
-        <li><a href="profiles.html">manegers</a></li>
+        <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li>
         </li>
         <li>
@@ -46,14 +46,15 @@
       <small style="color: white;">required field</small>
       <form class="form" method="post">
         {% csrf_token %}
+        {% comment %} {% csrf_token %}
         {% for item in form %}
         <p style='color:white;'>{{item.label}}</p>
         {{item}}
         {% for error in item.errors %}
         <p style="color:rgb(248, 114, 114);">{{error}}</p>
         {% endfor %}
-        {% endfor %}
-        {% comment %} <div class="form-group">
+        {% endfor %} {% endcomment %}
+        <div class="form-group">
           <input style="border-radius: 40px;" type="text" placeholder="* Job Title" name="title" required />
         </div> 
         <div class="form-group">
@@ -78,7 +79,7 @@
             placeholder="  Job Description"
             style="border-radius:50px ;"
           ></textarea>
-        </div> {% endcomment %}
+        </div>
         <input type="submit" class="btn btn-primary my-1" style="border-radius: 40px;"> />
         <a style="border-radius:50px ;" class="btn my-1" href="dashboard.html">Go Back</a>
       </form>

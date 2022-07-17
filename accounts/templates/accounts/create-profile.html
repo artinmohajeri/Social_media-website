@@ -29,12 +29,11 @@
         {% comment %} <li><a href="{% url 'profile' %}">
           <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a> {% endcomment %}
-        <small>choose a profile picture</small> 
-        <li>
-          <input type="file" style="border-radius:40px;">
-        </li>
 
         <li><a href="{% url 'register' %}">sign up</a></li>
+        <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
+        <li><a href="{% url 'posts' %}">posts</a></li>
+        <li><a href="{% url 'add_experience' %}">add experience</a></li>
         <li>
           <a href="{% url 'logout' %}">
             <span class="hide-sm"> Logout</span></a
@@ -50,50 +49,43 @@
         welcome {{user.username}}
       </h2>
       <p class="lead">
-        <i class="fas fa-user"style="color: black;"></i>create your profile
+        <b>create your profile</b>
       </p>
-      <small style="color: rgb(9, 9, 9);size:;">required fields</small>
+      <small style="color: rgb(9, 9, 9)">required fields</small>
       <form class="form" method="post">
         {% csrf_token %}
         <div class="form-group">
-          <input style="background-color:rgb(235, 224, 224) ;" type="text" placeholder="job" name="job" />
-          
-          <small class="form-text" style="color: black;"
-            >Give us an idea of where you are at in your career</small
-          >
+          <input style="background-color:rgb(235, 224, 224) ;border-radius:50px;" type="text" placeholder="job" name="job" />
         </div>
         <div class="form-group">
-          <input style="background-color:rgb(235, 224, 224) ;" type="text" placeholder="Company" name="company" />
+          <input style="background-color:rgb(235, 224, 224) ;border-radius:50px;" type="text" placeholder="Company" name="company" />
           <small class="form-text"style="color: black;"
             >Could be your own company or one you work for</small
           >
         </div>
         <div class="form-group">
-          <input style="background-color:rgb(231, 219, 219) ;" type="text" placeholder="Website" name="website" />
+          <input style="background-color:rgb(231, 219, 219) ;border-radius:50px;" type="text" placeholder="Website" name="website" />
           <small class="form-text"style="color: black;"
             >Could be your own or a company website</small
           >
         </div>
         <div class="form-group">
-          <input style="background-color:rgb(230, 218, 218) ;" type="text" placeholder="Location" name="location" />
+          <input style="background-color:rgb(230, 218, 218);border-radius:50px;" type="text" placeholder="Location" name="location" />
           <small class="form-text"style="color: black;"
             >City & state suggested (eg. Boston, MA)</small
           >
         </div>
         <div class="form-group">
-          <input style="background-color:rgb(232, 221, 221) ;" type="text" placeholder="* Skills" name="skills" />
+          <input style="background-color:rgb(232, 221, 221) ;border-radius:50px;" type="text" placeholder="* Skills" name="skills" />
           <small class="form-text"style="color: black;"
-            >Please use comma separated values (eg.
+            >Please separate with comma (eg.
             food,sperso,late,coffee)</small
           >
         </div>
-          <small class="form-text"style="color: black;"
-            >If you want your latest repos and a Github link, include your
-            username</small
-          >
-        </div>
+          
+          
         <div class="form-group">
-          <textarea style="background-color:rgb(235, 224, 224) ;" placeholder="A short bio of yourself" name="bio"></textarea>
+          <textarea style="background-color:rgb(235, 224, 224) ;border-radius:50px;" placeholder="A short bio of yourself" name="bio"></textarea>
           <small class="form-text"style="color: black;">Tell us a little about yourself</small>
         </div>
 

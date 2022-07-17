@@ -28,7 +28,7 @@ class SocialMedia(models.Model):
     )
     url = models.URLField()
     kinds = models.CharField(max_length = 1, choices = KINDS)
-    user = models.ForeignKey(User,on_delete = models.CASCADE,)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,)
 
 
 class Skill(models.Model):
@@ -42,5 +42,13 @@ class Experience(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     job_description = models.TextField()
-    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class AddProfile:
+    job = models.CharField(max_length=200)
+    company = models.CharField(max_length=200, null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+    location = models.CharField(max_length=200)
+    skills = models.CharField(max_length=200, null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
 

@@ -1,13 +1,12 @@
-from django.http import Http404, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import AddExperienceForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import User,Experience
 
 
 
@@ -55,32 +54,31 @@ def register(request):
 
 
 @login_required
-def profile(request):
-    # user = User.objects.get(id=id)
-    return render(request, 'accounts/profile.html', {})
+def profile(request, username):
+    user=get_object_or_404(User,username=username)    
+    return render(request, 'accounts/profile.html', {'user':user})
 
 
 @login_required
 def add_exp(request):
     if request.method == "POST":
-        form = AddExperienceForm(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.user = request.user
-            form.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 "Your date has been saved!")
-            # return redirect(to=reverse('profile'))
+        title = request.POST['title']
+        company = request.POST['company']
+        location = request.POST['location']
+        from_date = request.POST['from']
+        to = request.POST['to']
+        description = request.POST['description']
+        if title and location and from_date and to:
+            exp = Experience(job_title=title, company=company, from_date=from_date, location=location,to_date=to, job_description=description)
+            exp.user = request.user
+            # exp = exp.save(commit = False)
+            exp.save()
+            return redirect('profile')
         else:
-            print('Poor Artin')
-            return render(request, 'accounts/add-exp.html', {'form': form})
+            messages.info(request, ' fill out the form completly')
+            return redirect('add-exp')
 
-    elif request.method == "GET":
-        form = AddExperienceForm()
-    else:
-        return HttpResponse("404")
-
-    return render(request, 'accounts/add-exp.html', {'form': form})
+    return render(request, 'accounts/add-exp.html', {})
 
 
 @login_required
@@ -88,7 +86,7 @@ def create_profile(request):
     # if request.method == "POST":
     #     form = ProfileForm(request.POST)
     #     if form.is_valid():
-    #         form = form.save(commit=False)
+            # form = form.save(commit=False)
     #         form.user = request.user
     #         form.save()
     #         messages.add_message(request, messages.SUCCESS,"Your date has been saved!")
