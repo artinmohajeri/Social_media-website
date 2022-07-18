@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import User,Experience
+from .models import User,Experience,AddProfile
 
 
 
@@ -83,22 +83,23 @@ def add_exp(request):
 
 @login_required
 def create_profile(request):
-    # if request.method == "POST":
-    #     form = ProfileForm(request.POST)
-    #     if form.is_valid():
-            # form = form.save(commit=False)
-    #         form.user = request.user
-    #         form.save()
-    #         messages.add_message(request, messages.SUCCESS,"Your date has been saved!")
-    #         # return redirect(to=reverse('profile'))
-    #     else:
-    #         print('Poor Artin')
-    #         return render(request,'accounts/add-exp.html',{'form':form})
+    if request.method == "POST":
+        job = request.POST['job']
+        company = request.POST['company']
+        website = request.POST['website']
+        location = request.POST['location']
+        skills = request.POST['skills']
+        bio = request.POST['bio']
+        if job and company and location and skills:
+            pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio)
+            # pro.user = request.user
+            pro.save()
+        else:
+            messages.info(request, ' fill out the form completly')
+            return redirect('create_profile')
 
-    # elif request.method == "GET":
-    #     form = ProfileForm()
-    # else:
-    #     return HttpResponse("404")
+
+
     return render(request, 'accounts/create-profile.html', {})
 
 
@@ -119,3 +120,4 @@ def login_func(request):
 def logout_func(request):
     logout(request)
     return redirect(to=reverse('index'))
+

@@ -73,3 +73,13 @@ def sample(request):
         return render(request, 'blog/sample.html', {
             'message': 'your data has been saved!'
         })
+
+def delete_post(request, id):
+    post = get_object_or_404(Post ,id=id)
+    if post.writer == request.user:
+        post.delete()
+        messages.add_message(request,messages.SUCCESS,"Your post has been deleted!")
+        return redirect(to=reverse('posts'))
+    else:
+        pass
+    return render(request, "blog/posts.html", {})

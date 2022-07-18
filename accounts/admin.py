@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Experience,SocialMedia,Skill,User
 # Register your models here.
+from . import models
 
 from django.contrib import admin
 from . import models
@@ -8,6 +8,7 @@ from . import models
 
 
 # admin.site.register(models.User)
+# admin.site.register(models.AddProfile)
 
 @admin.register(models.User)
 class UserAdmin(admin.ModelAdmin):
@@ -25,9 +26,10 @@ class SkillAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     pass
 
-# @admin.register(models.Profile)
-# class ProfileAdmin(admin.ModelAdmin):
+# @admin.register(models.AddProfile)
+# class AddProfileAdmin(admin.ModelAdmin):
 #     pass
+
 
 
 

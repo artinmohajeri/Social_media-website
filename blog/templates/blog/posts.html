@@ -75,9 +75,14 @@
                 see this post
               </a>
               <br>
-              <small>{{post.date}}</small>
+              <small>{{post.date}}</small><br>
+
+              {% if post.writer.username == request.user.username %}
+              <a href="{% url 'delete_post' id=post.id  %}"
+                 class="btn btn-danger" style="border-radius:50px;">Delete</a>
+              {% endif %}
+
             </div>
-            
           </div>
           </div>
           {% endfor %}
