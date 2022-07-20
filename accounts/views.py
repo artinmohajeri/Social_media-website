@@ -53,7 +53,8 @@ def add_exp(request):
             exp.user = request.user
             # exp = exp.save(commit = False)
             exp.save()
-            return redirect('profile')
+            messages.SUCCESS(request, 'your experience has been saved!')
+            return redirect(to=reverse('profile'))
         else:
             messages.info(request, ' fill out the form completly')
             return redirect('add-exp')
@@ -63,36 +64,42 @@ def add_exp(request):
 
 @login_required
 def create_profile(request):
-    # user_profile = AddProfile.objects.get(user=request.user)
-    if request.method == "POST":
-        job = request.POST['job']
-        company = request.POST['company']
-        website = request.POST['website']
-        location = request.POST['location']
-        skills = request.POST['skills']
-        bio = request.POST['bio']
-        pic = request.POST['profilepic']
-        if job and company and location and skills:
-            pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio, pic=pic)
-            pro.user = request.user
-            pro.save()
-            # return redirect('profile')
+    user_profile = AddProfile.objects.get(user=request.user)
 
-        else:
-            messages.info(request, ' fill out the form completly')
-            return redirect('create_profile')
+    if request.method == 'POST':
+        if request.FILES.get('profilepic') == None:
+            image = user_profile.pic
+            bio = request.POST['bio']
+            location = request.POST['location']
+            company = request.POST['company']
+            website = request.POST['website']
+            skills = request.POST['skills']
+            
+            user_profile.pic = image
+            user_profile.bio = bio
+            user_profile.location = location
+            user_profile.company = company
+            user_profile.website = website
+            user_profile.skills = skills
+            user_profile.save()
 
-    # if request.FILES.get('image') == None:
-    #     image = user_profile.pic
-    #     user_profile.pic = image
-    #     user_profile.save()
+        if request.FILES.get('profilepic') != None:
+            image = request.FILES.get('profilepic')
+            bio = request.POST['bio']
+            location = request.POST['location']
+            company = request.POST['company']
+            website = request.POST['website']
+            skills = request.POST['skills']
 
-    # elif request.FILES.get('image') != None:
-    #     image = request.FILES.get('image')
-    #     user_profile.pic = image
-    #     user_profile.save()
+            user_profile.pic = image
+            user_profile.bio = bio
+            user_profile.location = location
+            user_profile.company = company
+            user_profile.website = website
+            user_profile.skills = skills
+            user_profile.save()
 
-    return render(request, 'accounts/create-profile.html', {})
+    return render(request, 'accounts/create-profile.html', {'user_profile':user_profile})
 
 
 def login_func(request):
@@ -113,3 +120,15 @@ def logout_func(request):
     logout(request)
     return redirect(to=reverse('index'))
 
+
+def delete_exp(request, id):
+    exp = get_object_or_404(Experience ,id=id)
+    if exp.user == request.user:
+        exp.delete()
+        messages.add_message(request,messages.SUCCESS,"Your post has been deleted!")
+        # return redirect(to=reverse('profile'))
+    else:
+        pass
+    return render(request, "accounts/profile.html", {})
+
+    

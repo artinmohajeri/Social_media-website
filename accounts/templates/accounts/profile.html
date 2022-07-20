@@ -105,6 +105,9 @@
             <p>
               <strong>Description: </strong>{{exp.job_description}}
             </p>
+            {% if request.user == exp.user %}
+            <a href="{% url 'deleteexp' id=exp.id %}" class='btn btn-danger' style='border-radius:50px;'>Delete</a>
+            {% endif %}
           </div>
           <hr>
           {% endfor %}
@@ -117,20 +120,20 @@
           </div>
         </div>
         <div class="profile-about bg-light p-2" style="background-color:rgb(89, 207, 239) ;border-radius: 160px;">
-          {% if user.bio %}
+          {% if user.profile.bio %}
           <h2>bio</h2>
           <p>
-            {{user.bio}}
+            {{user.profile.bio}}
           </p>
           {% endif %}
           <div class="line"></div>
-          {% if user.skill_set.all %}
+          {% if user.profile.skills %}
           <p><h2>skills</h2></p>
-          {% for skill in user.skill_set.all %}
+          {% comment %} {% for skill in user.profile.skills %} {% endcomment %}
           
-            <div class="p-1">{{skill.name}}</div>
+            <div class="p-1">{{user.profile.skills}}</div>
         
-            {% endfor %}
+            {% comment %} {% endfor %} {% endcomment %}
             
             {% endif %}
         </div>

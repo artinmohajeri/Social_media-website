@@ -79,7 +79,7 @@ def delete_post(request, id):
     if post.writer == request.user:
         post.delete()
         messages.add_message(request,messages.SUCCESS,"Your post has been deleted!")
-        return redirect(to=reverse('posts'))
+        # return redirect(to=reverse('posts'))
     else:
         pass
     return render(request, "blog/posts.html", {})
