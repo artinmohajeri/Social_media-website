@@ -25,7 +25,7 @@
         cafe
       </h1>
       <ul>
-        <li><a href="{% url 'profile' username=request.user.username %}"
+        <li><a href="{% url 'profile' username=request.user.username %}">
           <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
         <li><a href="{% url 'posts' %}">Posts</a></li>
@@ -79,8 +79,9 @@
                 src="{{comment.writer.pic.url}}"
                 alt=""
               />
-              <h4>{{comment.writer.get_full_name}}</h4>
+              <h4>{{comment.writer.username}}</h4>
             </a>
+
           </div>
           <div>
             <p class="my-1">
@@ -89,7 +90,11 @@
               {{comment.body}}
               <br>
               <p style="position:relative ; top:26px ;"><small><small>{{comment.date}}</small></small></p>
-            </p>
+            </p><br>
+            {% if comment.writer.username == request.user.username %}
+              <a href="{% url 'delete_comment' id=comment.id id=post.id %}"
+                 class="btn btn-danger" style="border-radius:50px;">Delete</a>
+            {% endif %}
           </div>
         </div>
         {% endfor %}

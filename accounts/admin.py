@@ -26,9 +26,9 @@ class SkillAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     pass
 
-# @admin.register(models.AddProfile)
-# class AddProfileAdmin(admin.ModelAdmin):
-#     pass
+@admin.register(models.AddProfile)
+class AddProfileAdmin(admin.ModelAdmin):
+    pass
 
 
 

@@ -83,3 +83,15 @@ def delete_post(request, id):
     else:
         pass
     return render(request, "blog/posts.html", {})
+
+
+# def delete_comment(request, id):
+#     suM = 0
+#     c = get_object_or_404(Post ,id=id)
+#     if c.writer == request.user:
+#         suM = 1
+#         messages.add_message(request,messages.SUCCESS,"Your comment has been deleted!")
+#         # return redirect(to=reverse('post'))
+#     else:
+#         pass
+#     return render(request, "blog/post.html", {'sum':sum})

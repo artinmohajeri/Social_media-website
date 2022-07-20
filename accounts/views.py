@@ -12,7 +12,6 @@ from .models import User,Experience,AddProfile
 
 def register(request):
     if request.method == "POST":
-        # user_profile = Profile.objects.get(user=request.user)
         # name = request.POST['name']
         username = request.POST['username']
         password = request.POST['password']
@@ -27,28 +26,9 @@ def register(request):
                 user_login = auth.authenticate(username=username, password=password)
                 auth.login(request, user_login)
                 return redirect('login')
-        # else:
-        #     messages.info(request, 'two password ')
-        #     return redirect('register')
-
-        # if request.FILES.get('image') == None:
-        #     image = user_profile.profileimg
-        #     bio = request.POST['bio']
-        #     location = request.POST['location']
-
-        #     user_profile.profileimg = image
-        #     user_profile.bio = bio
-        #     user_profile.location = location
-        #     user_profile.save()
-        # elif request.FILES.get('image') != None:
-        #     image = request.FILES.get('image')
-        #     bio = request.POST['bio']
-        #     location = request.POST['location']
-
-        #     user_profile.profileimg = image
-        #     user_profile.bio = bio
-        #     user_profile.location = location
-        #     user_profile.save()
+        else:
+            messages.info(request, 'two passwords do not match!')
+            return redirect('register')
 
     return render(request, 'accounts/register.html', {})
 
@@ -83,6 +63,7 @@ def add_exp(request):
 
 @login_required
 def create_profile(request):
+    # user_profile = AddProfile.objects.get(user=request.user)
     if request.method == "POST":
         job = request.POST['job']
         company = request.POST['company']
@@ -90,15 +71,26 @@ def create_profile(request):
         location = request.POST['location']
         skills = request.POST['skills']
         bio = request.POST['bio']
+        pic = request.POST['profilepic']
         if job and company and location and skills:
-            pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio)
-            # pro.user = request.user
+            pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio, pic=pic)
+            pro.user = request.user
             pro.save()
+            # return redirect('profile')
+
         else:
             messages.info(request, ' fill out the form completly')
             return redirect('create_profile')
 
+    # if request.FILES.get('image') == None:
+    #     image = user_profile.pic
+    #     user_profile.pic = image
+    #     user_profile.save()
 
+    # elif request.FILES.get('image') != None:
+    #     image = request.FILES.get('image')
+    #     user_profile.pic = image
+    #     user_profile.save()
 
     return render(request, 'accounts/create-profile.html', {})
 

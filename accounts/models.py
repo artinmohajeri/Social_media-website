@@ -37,6 +37,18 @@ class Skill(models.Model):
     name = models.CharField(max_length = 100)
     user = models.ManyToManyField(User)
 
+
+class AddProfile(models.Model):
+    pic = models.ImageField(null=True, blank = True,upload_to = 'profile_picture', default='profile_picture/defult.jpg')
+    job = models.CharField(max_length=200)
+    company = models.CharField(max_length=200, null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+    location = models.CharField(max_length=200)
+    skills = models.CharField(max_length=200, null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='profile')
+
+
 class Experience(models.Model):
     job_title = models.CharField(max_length=200)
     company = models.CharField(max_length=150)
@@ -44,16 +56,8 @@ class Experience(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     job_description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
 
 
 # user = get_user_model()
-class AddProfile:
-    job = models.CharField(max_length=200)
-    company = models.CharField(max_length=200, null=True, blank=True)
-    website = models.URLField(null=True, blank=True)
-    location = models.CharField(max_length=200)
-    skills = models.CharField(max_length=200, null=True, blank=True)
-    bio = models.TextField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 

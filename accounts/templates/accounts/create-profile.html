@@ -54,6 +54,14 @@
       <small style="color: rgb(9, 9, 9)">required fields</small>
       <form class="form" method="post">
         {% csrf_token %}
+
+
+        <div class="form-group">
+          <b><label for="profile pic" style="color:white; width:100px;">choose your profile picture</label></b>
+          <input value="profile picture" style="background-color:rgb(235, 224, 224) ;border-radius:50px;width:1030px; height:30px;" type="file" placeholder="profile pic" name="profilepic" />
+        </div>
+
+
         <div class="form-group">
           <input style="background-color:rgb(235, 224, 224) ;border-radius:50px;" type="text" placeholder="job" name="job" />
         </div>
@@ -90,7 +98,7 @@
         </div>
 
         <input type="submit" class="btn btn-primary my-1" style="border-radius:5px ; position: relative; bottom: 30px;" />
-        <a class="btn btn-light my-1" href="dashboard.html" style="border-radius:5px; position: relative; bottom: 30px;background-color: rgb(212, 146, 65);">Go Back</a>
+        <a class="btn btn-light my-1" href="{% url 'login' %}" style="border-radius:5px; position: relative; bottom: 30px;background-color: rgb(212, 146, 65);">Go Back</a>
       </form>
     </section>
   </body>

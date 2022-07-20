@@ -51,9 +51,9 @@
           <h1 class="large">{{user.username}}</h1>
           <h1>{{user.get_full_name}}</h1>
 
-          <h3 style="position:relative;top:30px ;">{{user.location}}</h3>
-          {% if user.job %}
-          <p class="leadprof">{{user.job}}</p>
+          <h3 style="position:relative;top:30px ;">{{user.profile.location}}</h3>
+          {% if user.profile.job %}
+          <p class="leadprof">{{user.profile.job}}</p>
           {% endif %}
           <div class="icons my-1">
 
