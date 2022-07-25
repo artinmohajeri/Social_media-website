@@ -64,42 +64,26 @@ def add_exp(request):
 
 @login_required
 def create_profile(request):
-    user_profile = AddProfile.objects.get(user=request.user)
+    # user_profile = AddProfile.objects.get(user=request.user)
+    if request.method == "POST":
+        job = request.POST['job']
+        company = request.POST['company']
+        website = request.POST['website']
+        location = request.POST['location']
+        skills = request.POST['skills']
+        bio = request.POST['bio']
+        # pic = request.POST['profilepic']
+        if job and company and location and skills:
+            pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio, user=request.user)
+            # pro.user = request.user
+            pro.save()
+            # return redirect('profile')
 
-    if request.method == 'POST':
-        if request.FILES.get('profilepic') == None:
-            image = user_profile.pic
-            bio = request.POST['bio']
-            location = request.POST['location']
-            company = request.POST['company']
-            website = request.POST['website']
-            skills = request.POST['skills']
-            
-            user_profile.pic = image
-            user_profile.bio = bio
-            user_profile.location = location
-            user_profile.company = company
-            user_profile.website = website
-            user_profile.skills = skills
-            user_profile.save()
+        else:
+            messages.info(request, ' fill out the form completly')
+            return redirect('create_profile')
 
-        if request.FILES.get('profilepic') != None:
-            image = request.FILES.get('profilepic')
-            bio = request.POST['bio']
-            location = request.POST['location']
-            company = request.POST['company']
-            website = request.POST['website']
-            skills = request.POST['skills']
-
-            user_profile.pic = image
-            user_profile.bio = bio
-            user_profile.location = location
-            user_profile.company = company
-            user_profile.website = website
-            user_profile.skills = skills
-            user_profile.save()
-
-    return render(request, 'accounts/create-profile.html', {'user_profile':user_profile})
+    return render(request, 'accounts/create-profile.html', {})
 
 
 def login_func(request):

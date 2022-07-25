@@ -17,10 +17,10 @@ class UserForm(UserCreationForm):
         model=models.User
         fields=['username','email']
 
-# class AddProfileForm(forms.ModelForm):
-#     class Meta:
-#         model=models.AddProfile
-#         fields="__all__"
+class AddProfileForm(forms.ModelForm):
+    class Meta:
+        model=models.AddProfile
+        fields="__all__"
 
 class SocialMediaForm(forms.ModelForm):
     class Meta:

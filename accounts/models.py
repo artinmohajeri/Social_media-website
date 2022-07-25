@@ -39,7 +39,7 @@ class Skill(models.Model):
 
 
 class AddProfile(models.Model):
-    pic = models.ImageField(null=True, blank = True,upload_to = 'profile_picture', default='profile_picture/defult.jpg')
+    picture = models.ImageField(null=True, blank = True,upload_to = 'profile_picture/', default='profile_picture/defult.jpg')
     job = models.CharField(max_length=200)
     company = models.CharField(max_length=200, null=True, blank=True)
     website = models.URLField(null=True, blank=True)
@@ -47,7 +47,6 @@ class AddProfile(models.Model):
     skills = models.CharField(max_length=200, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='profile')
-
 
 class Experience(models.Model):
     job_title = models.CharField(max_length=200)
@@ -60,4 +59,3 @@ class Experience(models.Model):
 
 
 # user = get_user_model()
-
