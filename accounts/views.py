@@ -53,8 +53,8 @@ def add_exp(request):
             exp.user = request.user
             # exp = exp.save(commit = False)
             exp.save()
-            messages.SUCCESS(request, 'your experience has been saved!')
-            return redirect(to=reverse('profile'))
+            # messages.SUCCESS(request, 'your experience has been saved!')
+            return redirect('/profile/'+request.user.username)
         else:
             messages.info(request, ' fill out the form completly')
             return redirect('add-exp')
@@ -77,7 +77,7 @@ def create_profile(request):
             pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio, user=request.user)
             # pro.user = request.user
             pro.save()
-            # return redirect('profile')
+            return redirect('/profile/'+request.user.username)
 
         else:
             messages.info(request, ' fill out the form completly')
@@ -103,6 +103,7 @@ def login_func(request):
 def logout_func(request):
     logout(request)
     return redirect(to=reverse('index'))
+
 
 
 def delete_exp(request, id):
