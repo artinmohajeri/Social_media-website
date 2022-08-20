@@ -98,7 +98,7 @@
               <p style="position:relative ; top:26px ;"><small><small>{{comment.date}}</small></small></p>
             </p><br>
             {% if comment.writer == request.user %}
-              <a href="{% url 'delete_comment' id=comment.id id=post.id %}"
+              <a href="{% url 'delete_comment' id=comment.id %}"
                  class="btn btn-danger" style="border-radius:50px;">Delete</a>
             {% endif %}
           </div>

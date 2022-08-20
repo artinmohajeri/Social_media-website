@@ -91,5 +91,5 @@ def delete_comment(request, id):
     c = get_object_or_404(Comment ,id=id)
     c.delete()
     messages.add_message(request,messages.SUCCESS,"Your comment has been deleted!")
-    return redirect('posts')
+    return redirect(request.META['HTTP_REFERER'])
     # return render(request, "blog/post.html", {})
