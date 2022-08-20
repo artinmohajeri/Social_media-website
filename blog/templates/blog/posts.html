@@ -26,7 +26,7 @@
       </h1>
       <ul>
         <li><a href="{% url 'profile' username=request.user.username %}">
-          <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+          <img src="{{user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li>
@@ -54,16 +54,19 @@
         {% for post in posts %}
         <div class="posts">
           <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
+
             <div>
               <a href="{% url 'profile' username=post.writer.username %}">
                 <img
                   class="round-img"
-                  src="{{post.writer.pic.url}}"
+                  src="{{post.writer.profile.picture.url}}"
                   alt="picture of user"
                 />
                 <h4>{{post.writer.username}}</h4>
               </a>
             </div>
+
+
             
             <div style="border-radius:20px ;">
               <p class="my-1">

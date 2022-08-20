@@ -47,6 +47,8 @@ def post(request, id):
             comment_object.post = p
             comment_object.writer = request.user
             comment_object.save()
+            return redirect('/post/'+ f'{id}')
+            # '/profile/'+request.user.username
     form = CommentForm()
     # comment = request.POST.get("text")
     # if comment:
@@ -79,19 +81,15 @@ def delete_post(request, id):
     if post.writer == request.user:
         post.delete()
         messages.add_message(request,messages.SUCCESS,"Your post has been deleted!")
-        # return redirect(to=reverse('posts'))
+        return redirect('posts')
     else:
         pass
     return render(request, "blog/posts.html", {})
 
 
-# def delete_comment(request, id):
-#     suM = 0
-#     c = get_object_or_404(Post ,id=id)
-#     if c.writer == request.user:
-#         suM = 1
-#         messages.add_message(request,messages.SUCCESS,"Your comment has been deleted!")
-#         # return redirect(to=reverse('post'))
-#     else:
-#         pass
-#     return render(request, "blog/post.html", {'sum':sum})
+def delete_comment(request, id):
+    c = get_object_or_404(Comment ,id=id)
+    c.delete()
+    messages.add_message(request,messages.SUCCESS,"Your comment has been deleted!")
+    return redirect('posts')
+    # return render(request, "blog/post.html", {})

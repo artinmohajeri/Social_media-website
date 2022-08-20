@@ -30,9 +30,8 @@
           <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a> {% endcomment %}
         <li><a href="{% url 'profile' username=request.user.username %}">
-          <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+          <img src="{{user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
-        <li><a href="{% url 'register' %}">sign up</a></li>
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li><a href="{% url 'posts' %}">posts</a></li>
         <li><a href="{% url 'add_experience' %}">add experience</a></li>
@@ -57,10 +56,9 @@
       <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-
         <div class="form-group">
           <b><label for="profile pic" style="color:white; width:100px;">choose your profile picture</label></b>
-          <input value="profile picture" style="background-color:rgb(235, 224, 224) ;border-radius:50px;width:1030px; height:30px;" type="file" placeholder="profile pic" name="profilepic" />
+          <input value="profile picture" style="background-color:rgb(235, 224, 224) ;border-radius:50px;width:1030px; height:30px;" type="file" placeholder="profile pic" name="pic" />
         </div>
 
 

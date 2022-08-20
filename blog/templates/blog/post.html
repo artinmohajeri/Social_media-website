@@ -26,7 +26,7 @@
       </h1>
       <ul>
         <li><a href="{% url 'profile' username=request.user.username %}">
-          <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+          <img src="{{user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
         <li><a href="{% url 'posts' %}">Posts</a></li>
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
@@ -40,17 +40,21 @@
     <section class="container">
       <a href="{% url 'posts' %}" class="btn">Back To Posts</a>
       <div class="post bg-white p-1 my-1">
+
+      
         <div>
-          <a href="{% url 'profile' username=request.user.username %}">
+          <a href="{% url 'profile' username=post.writer.username %}">
             <img
               class="round-img"
-              src="{{post.writer.pic.url}}"
+              src="{{post.writer.profile.picture.url}}"
               alt=""
             />
-            <h3>{{post.writer.get_full_name}}</h3>
+            {% comment %} <h3>{{post.writer.get_full_name}}</h3> {% endcomment %}
             <h4>{{post.writer.username}}</h4>
           </a>
         </div>
+        
+
         <div>
           <p class="my-1">
             <h3>{{post.title}}</h3>
@@ -72,17 +76,19 @@
       <hr style="height:5px ;background-color:rgb(155, 152, 152) ;">
       <div class="posts">
         <div class="post bg-white p-1 my-1" style="background-color: rgb(244, 191, 219);">
+
           <div>
             <a href="{% url 'profile' username=comment.writer.username %}">
               <img
                 class="round-img"
-                src="{{comment.writer.pic.url}}"
+                src="{{comment.writer.profile.picture.url}}"
                 alt=""
               />
               <h4>{{comment.writer.username}}</h4>
             </a>
-
           </div>
+
+
           <div>
             <p class="my-1">
                 <h3>{{comment.post.title}}</h3>
@@ -91,11 +97,10 @@
               <br>
               <p style="position:relative ; top:26px ;"><small><small>{{comment.date}}</small></small></p>
             </p><br>
-            {% if comment.writer.username == request.user.username %}
+            {% if comment.writer == request.user %}
               <a href="{% url 'delete_comment' id=comment.id id=post.id %}"
                  class="btn btn-danger" style="border-radius:50px;">Delete</a>
             {% endif %}
           </div>
         </div>
         {% endfor %}
-

@@ -72,9 +72,10 @@ def create_profile(request):
         location = request.POST['location']
         skills = request.POST['skills']
         bio = request.POST['bio']
+        pic = request.FILES.get('pic')
         # pic = request.POST['profilepic']
         if job and company and location and skills:
-            pro = AddProfile(job=job, company=company, location=location, website=website, skills=skills, bio=bio, user=request.user)
+            pro = AddProfile(picture=pic, job=job, company=company, location=location, website=website, skills=skills, bio=bio, user=request.user)
             # pro.user = request.user
             pro.save()
             return redirect('/profile/'+request.user.username)
