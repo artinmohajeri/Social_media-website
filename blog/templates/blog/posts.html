@@ -21,6 +21,7 @@
   </head>
   <body id="posts">
     <nav class="navbar bg-dark" style="background-color: rgb(99, 147, 2);border-radius:40px;">
+      {% comment %} <h1><b><b><b>{{num_of_likes}}</b></b></b></h1> {% endcomment %}
       <h1>
         cafe
       </h1>
@@ -56,6 +57,15 @@
           <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
 
             <div>
+
+
+              <!-- <form action="{% url 'like_post' post.id %}" method="POST"> -->
+                {% csrf_token %}
+              <a href="{% url 'like_post' post.id %}" type="submit" name="post_like" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(109, 238, 109);position: relative; left: 830px; top: 90px;">Like</a>
+              <a href="{% url 'dislike_post' post.id %}" type="submit" name="post_dislike" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(254, 111, 111);position: relative; left: 830px; top: 90px;">disLike</a>
+              <!-- </form> -->
+
+
               <a href="{% url 'profile' username=post.writer.username %}">
                 <img
                   class="round-img"
@@ -85,6 +95,9 @@
                  class="btn btn-danger" style="border-radius:50px;">Delete</a>
               {% endif %}
 
+              <p style="position:relative; left:680px;bottom:60px;">{{post.likes.count}} Likes</p>
+
+              {% comment %} <a href="{% url 'like_post' %}">h</a> {% endcomment %}
             </div>
           </div>
           </div>
