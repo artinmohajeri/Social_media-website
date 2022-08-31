@@ -18,15 +18,24 @@
     />
 
     <link rel="stylesheet" href="{%static 'style.min copy2.css'%}" />
-    <title>cafe</title>
+    <title>media</title>
   </head>
-  <body id="addex">
-    <nav class="navbar bg-dark" style="background-color:rgb(131, 131, 2) ; border-radius:40px;">
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#f10202,#760202);">
       
       <h1>
-        cafe
+        media
       </h1>
       <ul>
+        {% if request.user.profile.picture %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="https://cdn5.vectorstock.com/i/thumb-large/45/59/profile-photo-placeholder-icon-design-in-gray-vector-37114559.jpg" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li>
         </li>

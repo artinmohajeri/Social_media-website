@@ -1,5 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from blog.forms import PostForm
+
+from blog.models import Post,Comment
 from .forms import AddExperienceForm, UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -117,4 +120,24 @@ def delete_exp(request, id):
         pass
     return render(request, "accounts/profile.html", {})
 
-    
+def profile_posts(request, username):
+    user=get_object_or_404(User,username=username)
+    p = Post.objects.all()[:20]
+    form = PostForm()
+    return render(request, "accounts/profile_posts.html", {'user':user,'posts':p,'forms':form})
+
+def follow(request, username):
+    user = get_object_or_404(User, username=username)
+    user.followers.add(request.user)
+    # if request.user in user.followers.
+    return redirect(request.META['HTTP_REFERER'])
+
+def unfollow(request, username):
+    user = get_object_or_404(User, username=username)
+    user.followers.remove(request.user)
+    # if request.user in user.followers.
+    return redirect(request.META['HTTP_REFERER'])
+
+def followers_of_page(request):
+    u = User.objects.all()[:20]
+    return render(request,'accounts/followers_of_page.html', {'users':u})

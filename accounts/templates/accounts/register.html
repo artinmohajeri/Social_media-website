@@ -18,12 +18,12 @@
     />
 
     <link rel="stylesheet" href="{%static 'style.min.css'%}" />
-    <title>cafe</title>
+    <title>media</title>
   </head>
-  <body id="reg">
-    <nav class="navbar bg-dark" style="background-color:rgb(131, 131, 2) ;border-radius:40px;">
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#f10202,#760202);">
       <h1>
-         cafe
+         Media
       </h1>
       <ul>
         <li><a href="{% url 'login' %}">login</a></li>
@@ -34,11 +34,7 @@
       <strong style="color:rgb(247, 121, 121);"><b>{{form.non_field_errors}}</b></strong>
       {% endif %}
 
-      {% if messages %}
-      {% for message in messages %}
-      <h2><p style='color:rgb(248, 88, 88);'>{{message}}</p></h2>
-      {% endfor %}
-      {% endif %}
+     
 
       <h1 class="large text-primaryreg">
         Sign Up

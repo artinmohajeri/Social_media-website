@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'style.min copy3.css'%}" />
+    <title>media</title>
+</head>
+<body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#e00101,#760202);">
+        <h1>
+          Media
+        </h1>
+        <ul>
+          {% if request.user.profile.picture %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
+          <li>{{request.user.username}}</li>
+          <li><a href="{% url 'logout' %}">logout</a></li>
+          <li><a href="{% url 'posts' %}">posts</a></li>
+  
+        </ul>
+      </nav><br><br><br>
+
+      {% comment %} <b><b><b><h1>{{user.username}}</h1></b></b></b> {% endcomment %}
+      {% for post in posts %}
+      {% if user == post.writer %}
+      <div class="posts">
+        <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
+
+          <div>
+
+
+            <!-- <form action="{% url 'like_post' post.id %}" method="POST"> -->
+              {% csrf_token %}
+            <a href="{% url 'like_post' post.id %}" type="submit" name="post_like" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(109, 238, 109);position: relative; left: 830px; top: 90px;">Like</a>
+            <a href="{% url 'dislike_post' post.id %}" type="submit" name="post_dislike" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(254, 111, 111);position: relative; left: 830px; top: 90px;">disLike</a>
+            <!-- </form> -->
+
+            <a href="{% url 'profile' username=user.username %}">
+              
+            {% if user.profile.picture %}
+              <img
+                class="round-img"
+                src="{{user.profile.picture.url}}"
+                alt="picture of user"
+              />
+              {% else %}
+              <img
+                class="round-img"
+                src="{{user.pic.url}}"
+                alt="picture of user"
+                
+              />
+              {% endif %}
+            </a>
+          </div>
+
+
+          
+          <div style="border-radius:20px ;">
+            <p class="my-1">
+              <h3>{{post.title}}</h3>
+              <br>
+              {{post.body}}
+            </p> <br>
+            <a href="{{post.get_absolute_url}}" class="btn btn-primary" style="color:black ;border-radius: 30px; background-color: rgb(243, 64, 225);">
+              see this post
+            </a>
+            <br>
+            <small>{{post.date}}</small><br>
+
+            {% if post.writer.username == request.user.username %}
+            <a href="{% url 'delete_post' id=post.id %}"
+               class="btn btn-danger" style="border-radius:50px;">Delete</a>
+            {% endif %}
+
+            <p style="position:relative; left:680px;bottom:60px;">{{post.likes.count}} Likes</p>
+
+            {% comment %} <a href="{% url 'like_post' %}">h</a> {% endcomment %}
+          </div>
+        </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+</body>
+</html>

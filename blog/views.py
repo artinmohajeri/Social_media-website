@@ -32,7 +32,6 @@ def posts(request):
     return render(request, 'blog/posts.html', {
         'posts': p,
         'forms': form,
-        'is_like':is_like,
         # 'u':u,
     })
 
@@ -83,7 +82,7 @@ def delete_post(request, id):
         post.delete()
         messages.add_message(request,messages.SUCCESS,"Your post has been deleted!")
         # return redirect('posts')
-        return HttpResponseRedirect(reverse('posts'))
+        return redirect(request.META['HTTP_REFERER'])
 
     else:
         pass
@@ -94,7 +93,7 @@ def delete_comment(request, id):
     c = get_object_or_404(Comment ,id=id)
     c.delete()
     messages.add_message(request,messages.SUCCESS,"Your comment has been deleted!")
-    # return redirect(request.META['HTTP_REFERER'])
+    return redirect(request.META['HTTP_REFERER'])
 
     # return render(request, "blog/post.html", {})
 is_like = False
@@ -108,10 +107,9 @@ is_like = False
 def dislike_post(request, id):
     post = get_object_or_404(Post, id=id)
     post.likes.remove(request.user)
-    return HttpResponseRedirect(reverse('posts'))
+    return redirect(request.META['HTTP_REFERER'])
 
 def like_post(request, id):
     post = get_object_or_404(Post, id=id)
     post.likes.add(request.user)
-    return HttpResponseRedirect(reverse('posts'))
-
+    return redirect(request.META['HTTP_REFERER'])

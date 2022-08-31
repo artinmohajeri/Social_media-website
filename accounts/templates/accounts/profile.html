@@ -18,17 +18,24 @@
     />
 
     <link rel="stylesheet" href="{%static 'style.min.css'%}" />
-    <title>cafe</title>
+    <title>meida</title>
   </head>
-  <body id="prof">
-    <nav class="navbar bg-dark"  style="background-color:rgb(131, 131, 2) ;border-radius:40px;">
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#e00101,#760202);">
       <h1>
-        cafe
+        Meida
       </h1>
       <ul>
+        {% if request.user.profile.picture %}
         <li><a href="{% url 'profile' username=request.user.username %}">
           <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="https://cdn5.vectorstock.com/i/thumb-large/45/59/profile-photo-placeholder-icon-design-in-gray-vector-37114559.jpg" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
+
         <li>{{user.username}}</li>
         <li><a href="{% url 'logout' %}">logout</a></li>
         <li><a href="{% url 'posts' %}">posts</a></li>
@@ -39,16 +46,45 @@
     <section class="container">
       <a style='border-radius:50px;' href="{% url 'create_profile' %}" class="btn">go back to create profile</a>
 
+
+      {% if user != request.user %}
+
+        {% if request.user not in user.followers.all %}
+          <a style='border-radius:50px;background-color: chartreuse;' href="{% url 'follow' username=user.username %}" class="btn">Follow</a>
+        {% else %}
+          <a style='border-radius:50px;background-color: rgb(250, 96, 96); color: white;' href="{% url 'unfollow' username=user.username %}" class="btn">Unfollow</a>
+        {% endif %}
+
+      {% endif %}
+
+      <a style="border-radius:0px;color:black; position: relative;left: 200px; background-image: linear-gradient(90deg, rgb(203, 186, 186),rgb(238, 227, 227), rgb(192, 174, 174),rgb(236, 226, 226),rgb(192, 174, 174));" href="" class="btn">{{user.followers.count}} followers</a>
+
+
+
+
+
+      <!-- <h1 style="color:white;"><big><big>{{user.followers.count}}</big></big></h1> -->
       <div class="profile-grid my-1">
         <!-- Top -->
-        <div class="profile-top bg-primary p-2"  style="background-image: linear-gradient(104deg,rgb(212, 0, 255),rgb(253, 27, 177),rgb(249, 131, 230)) ; border-radius:200px ;">
+        {% if user.profile.picture %}
+        <div class="profile-top bg-primary p-2"  style="background-image: linear-gradient(144deg,rgb(149, 0, 255),rgb(221, 3, 228)) ; border-radius:500px ;width: 1000px;">
+          <img
+          style="border-radius:300px;"
+          class="prof"
+          src="{{user.profile.picture.url}}"
+          alt="user picture"
+          />
+          {% else %}
+          <div class="profile-top bg-primary p-2"  style="background-image: linear-gradient(144deg,rgb(149, 0, 255),rgb(221, 3, 228)) ; border-radius:500px ;width: 1000px;">
           <img
             style="border-radius:300px;"
             class="prof"
-            src="{{user.profile.picture.url}}"
+            src="{{user.pic.url}}"
             alt="user picture"
           />
 
+        {% endif %}
+      
           <h1 class="large">{{user.username}}</h1>
           <h1>{{user.get_full_name}}</h1>
 
@@ -56,6 +92,7 @@
           {% if user.profile.job %}
           <p class="leadprof">{{user.profile.job}}</p>
           {% endif %}
+          <b><a style="border-radius:50px;" href="{% url 'profile_posts' username=user.username %}" type='submit' class="btn">{{user.username}}'s posts</a></b>
           <div class="icons my-1">
 
 
@@ -93,7 +130,7 @@
         
 
         
-        <div class="profile-exp bg-white p-2" style="width: 1070px;background-color:rgb(216, 243, 117) ;border-radius: 110px;">
+        <div class="profile-exp bg-white p-2" style="width: 1000px;background-color:rgb(216, 243, 117) ;border-radius: 110px;">
           <h2 class="text-primary"></h2>
           <h2>experiences:</h2><br>
           {% if user.experience_set.all %}

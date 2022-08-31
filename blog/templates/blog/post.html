@@ -17,17 +17,24 @@
     />
 
     <link rel="stylesheet" href="{%static 'style.min copy4.css'%}" />
-    <title>cafe</title>
+    <title>media</title>
   </head>
-  <body id='postbody'>
-    <nav class="navbar bg-dark" style="background-color:rgb(106, 141, 2) ;border-radius:40px;">
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#f10202,#760202);">
       <h1>
-        cafe
+        Media
       </h1>
       <ul>
+        {% if request.user.profile.picture %}
         <li><a href="{% url 'profile' username=request.user.username %}">
-          <img src="{{user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+          <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
+
         <li><a href="{% url 'posts' %}">Posts</a></li>
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li>
@@ -43,12 +50,23 @@
 
       
         <div>
+          {% if post.writer.profile.picture %}
           <a href="{% url 'profile' username=post.writer.username %}">
             <img
               class="round-img"
               src="{{post.writer.profile.picture.url}}"
               alt=""
             />
+            {% else %}
+            <a href="{% url 'profile' username=post.writer.username %}">
+              <img
+                class="round-img"
+                src="{{post.writer.pic.url}}"
+                alt=""
+              />
+            {% endif %}
+
+
             {% comment %} <h3>{{post.writer.get_full_name}}</h3> {% endcomment %}
             <h4>{{post.writer.username}}</h4>
           </a>
@@ -78,12 +96,21 @@
         <div class="post bg-white p-1 my-1" style="background-color: rgb(244, 191, 219);">
 
           <div>
+            {% if comment.writer.profile.picture %}
             <a href="{% url 'profile' username=comment.writer.username %}">
               <img
                 class="round-img"
                 src="{{comment.writer.profile.picture.url}}"
                 alt=""
               />
+              {% else %}
+              <a href="{% url 'profile' username=comment.writer.username %}">
+                <img
+                  class="round-img"
+                  src="{{comment.writer.pic.url}}"
+                  alt=""
+                />
+              {% endif %}
               <h4>{{comment.writer.username}}</h4>
             </a>
           </div>

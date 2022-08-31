@@ -1,0 +1,73 @@
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'style.min copy2.css'%}" />
+    <title>media</title>
+  </head>
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#e00101,#760202);">
+        <h1>
+          Media
+        </h1>
+        <ul>
+          {% if request.user.profile.picture %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
+          <li>{{request.user.username}}</li>
+          <li><a href="{% url 'logout' %}">logout</a></li>
+          <li><a href="{% url 'posts' %}">posts</a></li>
+  
+        </ul>
+      </nav>    
+      <br><br><br><br>
+      {% for user in users %}
+      {% if user in user.followers.all %}
+      <div class="posts" style="width:70%;">
+          
+        <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
+
+          <div>
+
+
+
+            <a href="{% url 'profile' username=user.username %}">
+              {% if user.profile.picture %}
+              <img
+                class="round-img"
+                src="{{user.profile.picture.url}}"
+                alt="picture of user"
+              />
+              {% else %}
+              <img
+                class="round-img"
+                src="{{user.pic.url}}"
+                alt="picture of user"
+                
+              />
+              {% endif %}
+              <h3>{{user.username}}</h3>
+            </a>
+          </div>
+          <a href="{% url 'profile' username=user.username %}" class="btn" style="width:200px; height:30px;background-color:rgb(147, 147, 147);border-radius: 100px; ">check this profile!</a>
+          <h2 style="color:black; position: relative;left: 260px; bottom:50px;">{{user.followers.count}} followers</h2>
+
+  
+          </div>
+        </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+
+</body>
+</html> {% endcomment %}

@@ -18,20 +18,29 @@
     />
 
     <link rel="stylesheet" href="{%static 'style.min copy.css'%}" />
-    <title>cafe</title>
+    <title>media</title>
   </head>
-  <body id="cp1">
-    <nav class="navbar bg-dark" style="background-color:rgb(131, 131, 2) ;border-radius:40px;">
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#f10202,#760202);">
       <h1>
-        cafe
+        Media
       </h1>
       <ul>
-        {% comment %} <li><a href="{% url 'profile' %}">
-          <img src="{{user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
-        </li></a> {% endcomment %}
+      
+
+
+        {% if request.user.profile.picture %}
         <li><a href="{% url 'profile' username=request.user.username %}">
-          <img src="{{user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+          <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
+
+
+
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li><a href="{% url 'posts' %}">posts</a></li>
         <li><a href="{% url 'add_experience' %}">add experience</a></li>
@@ -43,16 +52,16 @@
       </ul>
     </nav>
     <section class="container">
-      <h1 class="large text-primary" style="color: black;">
+      <h1 class="large text-primary" style="color: rgb(223, 221, 221);">
         Create Your Profile
       </h1>
-      <h2 style="color: black;">
+      <h2 style="color: rgb(218, 214, 214);">
         welcome {{user.username}}
       </h2>
-      <p class="lead">
+      <p class="lead" style="color:white;">
         <b>create your profile</b>
       </p>
-      <small style="color: rgb(9, 9, 9)">required fields</small>
+      <small style="color: rgb(227, 225, 225)">required fields</small>
       <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -67,25 +76,25 @@
         </div>
         <div class="form-group">
           <input style="background-color:rgb(235, 224, 224) ;border-radius:50px;" type="text" placeholder="Company" name="company" />
-          <small class="form-text"style="color: black;"
+          <small class="form-text"style="color: white;"
             >Could be your own company or one you work for</small
           >
         </div>
         <div class="form-group">
           <input style="background-color:rgb(231, 219, 219) ;border-radius:50px;" type="text" placeholder="Website" name="website" />
-          <small class="form-text"style="color: black;"
+          <small class="form-text"style="color: white;"
             >Could be your own or a company website</small
           >
         </div>
         <div class="form-group">
           <input style="background-color:rgb(230, 218, 218);border-radius:50px;" type="text" placeholder="Location" name="location" />
-          <small class="form-text"style="color: black;"
+          <small class="form-text"style="color: white;"
             >City & state suggested (eg. Boston, MA)</small
           >
         </div>
         <div class="form-group">
           <input style="background-color:rgb(232, 221, 221) ;border-radius:50px;" type="text" placeholder="* Skills" name="skills" />
-          <small class="form-text"style="color: black;"
+          <small class="form-text"style="color: white;"
             >Please separate with comma (eg.
             food,sperso,late,coffee)</small
           >
@@ -94,11 +103,11 @@
           
         <div class="form-group">
           <textarea style="background-color:rgb(235, 224, 224) ;border-radius:50px;" placeholder="A short bio of yourself" name="bio"></textarea>
-          <small class="form-text"style="color: black;">Tell us a little about yourself</small>
+          <small class="form-text"style="color: white;">Tell us a little about yourself</small>
         </div>
 
         <input type="submit" class="btn btn-primary my-1" style="border-radius:5px ; position: relative; bottom: 30px;" />
-        <a class="btn btn-light my-1" href="{% url 'login' %}" style="border-radius:5px; position: relative; bottom: 30px;background-color: rgb(212, 146, 65);">Go Back</a>
+        <a class="btn btn-light my-1" href="{% url 'login' %}" style="border-radius:5px; position: relative; bottom: 30px;background-color: rgb(202, 212, 65);">Go Back</a>
       </form>
     </section>
   </body>

@@ -17,18 +17,27 @@
     />
     
     <link rel="stylesheet" href="{%static 'style.min copy3.css' %}" />
-    <title>cafe</title>
+    <title>media</title>
   </head>
-  <body id="posts">
-    <nav class="navbar bg-dark" style="background-color: rgb(99, 147, 2);border-radius:40px;">
+  <body style="background-image:linear-gradient(90deg, #002223, #0195a1);">
+    <nav class="navbar bg-dark" style="background-image:linear-gradient(90deg,#f10202,#760202);">
       {% comment %} <h1><b><b><b>{{num_of_likes}}</b></b></b></h1> {% endcomment %}
       <h1>
-        cafe
+        Media
       </h1>
       <ul>
+
+        {% if request.user.profile.picture %}
         <li><a href="{% url 'profile' username=request.user.username %}">
-          <img src="{{user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+          <img src="{{request.user.profile.picture.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
         </li></a>
+        {% else %}
+        <li><a href="{% url 'profile' username=request.user.username %}">
+          <img src="{{request.user.pic.url}}" alt="profile pic" style="width:50px;height:50px;border-radius:100px;">
+        </li></a>
+        {% endif %}
+
+
         <li><a href="{% url 'profile' username=request.user.username %}">profile</a></li>
         <li>
           <a href="{% url 'logout' %}">
@@ -46,14 +55,15 @@
       <div class="post-form">
         <form class="form my-1" method="post">
           {% csrf_token %}
-          <input type="text" style="border-radius:50px ; width: 400px; background-image: linear-gradient(144deg, #e5e5e5,#d1d1d1,#b2b2b2,#828282);" placeholder=" title..." name="title">
+          <input type="text" style="border-radius:50px ; width: 400px; background-image: linear-gradient(144deg, #e5e5e5,#c0bdbd);" placeholder=" title..." name="title">
           <br>
-          <textarea style="border-radius:70px; background-image: linear-gradient(144deg, #e5e5e5,#d1d1d1,#b2b2b2,#828282);" cols="30" rows="5" placeholder="   body..." name="body"></textarea>
+          <textarea style="border-radius:70px; background-image: linear-gradient(180deg, #ededed,#bfbebe);" cols="30" rows="5" placeholder="   body..." name="body"></textarea>
           <input style="background-color:rgb(240, 240, 98) ; color: black;border-radius: 30px;" type="submit" value="post" class="btn btn-dark my-1" />
 
         </form>
         {% for post in posts %}
         <div class="posts">
+          
           <div class="post bg-white my-1 p-1" style="border-radius:200px ;">
 
             <div>
@@ -61,17 +71,25 @@
 
               <!-- <form action="{% url 'like_post' post.id %}" method="POST"> -->
                 {% csrf_token %}
-              <a href="{% url 'like_post' post.id %}" type="submit" name="post_like" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(109, 238, 109);position: relative; left: 830px; top: 90px;">Like</a>
-              <a href="{% url 'dislike_post' post.id %}" type="submit" name="post_dislike" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(254, 111, 111);position: relative; left: 830px; top: 90px;">disLike</a>
+              <a href="{% url 'like_post' post.id %}" type="submit" name="post_like" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(109, 238, 109);position: relative; left: 800px; top: 90px;">Like</a>
+              <a href="{% url 'dislike_post' post.id %}" type="submit" name="post_dislike" value="{{post.id}}" class="btn" style="border-radius:20px; background-color:rgb(254, 111, 111);position: relative; left: 800px; top: 90px;">disLike</a>
               <!-- </form> -->
 
-
+                {% if post.writer.profile.picture %}
               <a href="{% url 'profile' username=post.writer.username %}">
                 <img
                   class="round-img"
                   src="{{post.writer.profile.picture.url}}"
                   alt="picture of user"
                 />
+                {% else %}
+                <a href="{% url 'profile' username=post.writer.username %}">
+                  <img
+                    class="round-img"
+                    src="{{post.writer.pic.url}}"
+                    alt="picture of user"
+                  />
+                {% endif %}
                 <h4>{{post.writer.username}}</h4>
               </a>
             </div>
