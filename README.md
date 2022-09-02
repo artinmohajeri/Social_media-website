@@ -1,4 +1,4 @@
-# Cafe-website-practice
+# Social media-website
 # write these commands in your terminal first.
 
 python -m venv .venv
